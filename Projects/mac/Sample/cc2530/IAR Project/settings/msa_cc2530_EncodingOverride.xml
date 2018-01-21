@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<userOverrides>
+  <override>
+    <path>F:\LXP_Project\HBee\Code\HB1x_R_E\Projects\mac\Sample\Application\Rf.h</path>
+    <encoding>System</encoding>
+  </override>
+  <override>
+    <path>F:\LXP_Project\HBee\Code\HB1x_R_E\Projects\mac\Sample\Application\Serial.h</path>
+    <encoding>System</encoding>
+  </override>
+  <override>
+    <path>F:\LXP_Project\HBee\Code\HB1x_R_E\Projects\mac\Sample\Application\Serial\SAps.c</path>
+    <encoding>System</encoding>
+  </override>
+  <override>
+    <path>F:\LXP_Project\HBee\Code\HB1x_R_E\Projects\mac\Sample\Application\Serial\SProtocol.c</path>
+    <encoding>System</encoding>
+  </override>
+</userOverrides>
+
+

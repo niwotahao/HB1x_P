@@ -1,0 +1,2 @@
+v1.0.0 ----> 按键OPEN 进入设置，REPLY移动位数，NEXT修改数值。
+v1.0.1 ----> 按键OPEN 进入设置，OPEN移动位数， REPLY修改数值,NEXT退出。

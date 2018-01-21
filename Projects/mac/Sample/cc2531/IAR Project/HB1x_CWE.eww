@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<workspace>
+  <project>
+    <path>$WS_DIR$\msa_cc2531.ewp</path>
+  </project>
+  <batchBuild>
+    <batchDefinition>
+      <name>ALL</name>
+      <member>
+        <project>msa_cc2531</project>
+        <configuration>HB1x_UC</configuration>
+      </member>
+      <member>
+        <project>msa_cc2531</project>
+        <configuration>HB1x_C</configuration>
+      </member>
+      <member>
+        <project>msa_cc2531</project>
+        <configuration>HB1S_W</configuration>
+      </member>
+      <member>
+        <project>msa_cc2531</project>
+        <configuration>HB1M_W</configuration>
+      </member>
+      <member>
+        <project>msa_cc2531</project>
+        <configuration>HB1x_J</configuration>
+      </member>
+      <member>
+        <project>msa_cc2531</project>
+        <configuration>HB1x_L</configuration>
+      </member>
+      <member>
+        <project>msa_cc2531</project>
+        <configuration>HB1L_E V1</configuration>
+      </member>
+      <member>
+        <project>msa_cc2531</project>
+        <configuration>HB1M_E</configuration>
+      </member>
+      <member>
+        <project>msa_cc2531</project>
+        <configuration>HB1S_E</configuration>
+      </member>
+      <member>
+        <project>msa_cc2531</project>
+        <configuration>HB1S_E-ZC</configuration>
+      </member>
+      <member>
+        <project>msa_cc2531</project>
+        <configuration>HB1X_E V1</configuration>
+      </member>
+      <member>
+        <project>msa_cc2531</project>
+        <configuration>HB1A_E</configuration>
+      </member>
+      <member>
+        <project>msa_cc2531</project>
+        <configuration>HB1B_E</configuration>
+      </member>
+    </batchDefinition>
+  </batchBuild>
+</workspace>
+
+

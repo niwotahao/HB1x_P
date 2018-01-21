@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<userOverrides>
+  <override>
+    <path>F:\LXP_Project\HBee\HB1x_CRWE\Code\HB1x_CRWE v3\HB1x_CWE v3\HB1x_CWE\Projects\mac\Sample\Application\HB1A_E.c</path>
+    <encoding>System</encoding>
+  </override>
+  <override>
+    <path>F:\LXP_Project\HBee\HB1x_CRWE\Code\HB1x_CRWE v3\HB1x_CWE v3\HB1x_CWE\Projects\mac\Sample\Application\HB1B_E.c</path>
+    <encoding>System</encoding>
+  </override>
+  <override>
+    <path>F:\LXP_Project\HBee\HB1x_CRWE\Code\HB1x_CRWE v3\HB1x_CWE v3\HB1x_CWE\Projects\mac\Sample\Application\HB1M_E.c</path>
+    <encoding>System</encoding>
+  </override>
+  <override>
+    <path>F:\LXP_Project\HBee\HB1x_CRWE\Code\HB1x_CRWE v3\HB1x_CWE v3\HB1x_CWE\Projects\mac\Sample\Application\HB1S_E.c</path>
+    <encoding>System</encoding>
+  </override>
+  <override>
+    <path>F:\LXP_Project\HBee\HB1x_CRWE\Code\HB1x_CRWE v3\HB1x_CWE v3\HB1x_CWE\Projects\mac\Sample\Application\mEndBsp\bPower.c</path>
+    <encoding>System</encoding>
+  </override>
+  <override>
+    <path>F:\LXP_Project\HBee\HB1x_CRWE\Code\HB1x_CRWE v3\HB1x_CWE v3\HB1x_CWE\Projects\mac\Sample\Application\msa.h</path>
+    <encoding>System</encoding>
+  </override>
+  <override>
+    <path>F:\LXP_Project\HBee\HB1x_CRWE\Code\HB1x_CRWE v3\HB1x_CWE v3\HB1x_CWE\Projects\mac\Sample\Application\msa_ZC.c</path>
+    <encoding>System</encoding>
+  </override>
+  <override>
+    <path>F:\LXP_Project\HBee\HB1x_CRWE\Code\HB1x_CRWE v3\HB1x_CWE v3\HB1x_CWE\Projects\mac\Sample\Application\sEndBsp\bPower.c</path>
+    <encoding>System</encoding>
+  </override>
+  <override>
+    <path>F:\LXP_Project\HBee\HB1x_CRWE\Code\HB1x_CRWE v3\HB1x_P\Projects\mac\Sample\Application\HB1D_E.c</path>
+    <encoding>System</encoding>
+  </override>
+  <override>
+    <path>F:\LXP_Project\HBee\HB1x_CRWE\Code\HB1x_CWE v2\HB1x_CWE\Projects\mac\Sample\Application\msa_ZC.c</path>
+    <encoding>System</encoding>
+  </override>
+  <override>
+    <path>F:\LXP_Project\HBee\HB1x_CRWE\Code\HB1x_CWE\Projects\mac\Sample\Application\EndBsp\Menu.c</path>
+    <encoding>System</encoding>
+  </override>
+  <override>
+    <path>F:\LXP_Project\HBee\HB1x_CRWE\Code\HB1x_CWE\Projects\mac\Sample\Application\Serial\SAps.c</path>
+    <encoding>System</encoding>
+  </override>
+</userOverrides>
+
+

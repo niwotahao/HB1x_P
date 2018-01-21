@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<Project>
+  <Desktop>
+    <Static>
+      <Debug-Log>
+        
+        
+      <ColumnWidth0>20</ColumnWidth0><ColumnWidth1>1307</ColumnWidth1></Debug-Log>
+      <Build>
+        
+        
+        
+        
+      <ColumnWidth0>20</ColumnWidth0><ColumnWidth1>980</ColumnWidth1><ColumnWidth2>261</ColumnWidth2><ColumnWidth3>65</ColumnWidth3></Build>
+      <Workspace>
+        <ColumnWidths>
+          
+          
+          
+          
+        <Column0>287</Column0><Column1>27</Column1><Column2>27</Column2><Column3>27</Column3></ColumnWidths>
+      </Workspace>
+      <Disassembly>
+        <col-names>
+          
+          
+        <item>Disassembly</item><item>_I0</item></col-names>
+        <col-widths>
+          
+          
+        <item>500</item><item>20</item></col-widths>
+        <DisasmHistory/>
+        
+        
+      <ShowCodeCoverage>1</ShowCodeCoverage><ShowInstrProfiling>1</ShowInstrProfiling></Disassembly>
+    <WATCH_1><expressions><item>pMsg[1]</item><item>pMsg[3]</item><item>pMsg[5]</item><item>pMsg[7]</item><item>pMsg[10]</item><item>pMsg[12]</item><item>pP2EMsg</item><item>rfCmd</item><item>cmd</item><item>len</item><item>pBuf[0]</item><item>pBuf[1]</item><item>pBuf[2]</item><item>pBuf[3]</item><item>pBuf[4]</item><item>pBuf[5]</item><item>pBuf[6]</item><item>pBuf[7]</item><item>addr</item><item>msa_DevShortAddr</item><item>KeyBuf</item><item>rfCmd</item><item>cmd</item><item>LedCnt</item><item>Channle</item><item>P0</item><item>KeyNum</item><item>KeyValue</item><item>Channle</item><item>FontChip</item><item>unLen</item><item>status</item><item>RFIDTemp</item><item>status</item><item>RFIDUID</item><item/></expressions><col-names><item>Expression</item><item>Location</item><item>Type</item><item>Value</item></col-names><col-widths><item>168</item><item>150</item><item>100</item><item>222</item></col-widths></WATCH_1><Find-in-Files><ColumnWidth0>664</ColumnWidth0><ColumnWidth1>94</ColumnWidth1><ColumnWidth2>1138</ColumnWidth2></Find-in-Files></Static>
+    <Windows>
+      
+      
+      
+    <Wnd3>
+        <Tabs>
+          <Tab>
+            <Identity>TabID-26335-2854</Identity>
+            <TabName>Debug Log</TabName>
+            <Factory>Debug-Log</Factory>
+            <Session/>
+          </Tab>
+          <Tab>
+            <Identity>TabID-25812-2864</Identity>
+            <TabName>Build</TabName>
+            <Factory>Build</Factory>
+            <Session/>
+          </Tab>
+        <Tab><Identity>TabID-26044-30967</Identity><TabName>Find in Files</TabName><Factory>Find-in-Files</Factory><Session/></Tab></Tabs>
+        
+      <SelectedTab>0</SelectedTab></Wnd3><Wnd4>
+        <Tabs>
+          <Tab>
+            <Identity>TabID-4316-2857</Identity>
+            <TabName>Workspace</TabName>
+            <Factory>Workspace</Factory>
+            <Session>
+              
+            <NodeDict><ExpandedNode>msa_cc2531</ExpandedNode><ExpandedNode>msa_cc2531/Application</ExpandedNode><ExpandedNode>msa_cc2531/Application/HB1L_W</ExpandedNode><ExpandedNode>msa_cc2531/Application/HB1L_W/lEndBsp</ExpandedNode><ExpandedNode>msa_cc2531/Application/HB1S_W</ExpandedNode><ExpandedNode>msa_cc2531/Application/HB1x_E</ExpandedNode><ExpandedNode>msa_cc2531/Application/HB1x_E/HB1D_E</ExpandedNode><ExpandedNode>msa_cc2531/Application/HB1x_W</ExpandedNode><ExpandedNode>msa_cc2531/Application/sEndBsp</ExpandedNode><ExpandedNode>msa_cc2531/ReadMe</ExpandedNode></NodeDict></Session>
+          </Tab>
+        </Tabs>
+        
+      <SelectedTab>0</SelectedTab></Wnd4><Wnd5>
+        <Tabs>
+          <Tab>
+            <Identity>TabID-15064-2860</Identity>
+            <TabName>Disassembly</TabName>
+            <Factory>Disassembly</Factory>
+            <Session/>
+          </Tab>
+        <Tab><Identity>TabID-27056-5453</Identity><TabName>Watch 1</TabName><Factory>WATCH_1</Factory></Tab></Tabs>
+        
+      <SelectedTab>0</SelectedTab></Wnd5></Windows>
+    <Editor>
+      
+      
+      
+      
+    <Pane><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\..\Application\HB1E_E.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>921</YPos2><SelStart2>33366</SelStart2><SelEnd2>33377</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\..\Application\HB1E_E\MFRC522.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>356</YPos2><SelStart2>11447</SelStart2><SelEnd2>11447</SelEnd2></Tab><ActiveTab>1</ActiveTab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\..\Application\msa_Main.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>97</YPos2><SelStart2>4937</SelStart2><SelEnd2>4937</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\..\..\..\..\Components\hal\target\CC2530USB\hal_sleep.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>225</YPos2><SelStart2>11491</SelStart2><SelEnd2>11491</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\..\Application\HB1E_E\MFRC522.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>92</YPos2><SelStart2>4217</SelStart2><SelEnd2>4217</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\..\..\..\..\Components\hal\common\hal_assert.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>179</YPos2><SelStart2>6585</SelStart2><SelEnd2>6585</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\..\..\Application\MFRC522\MFRC522.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>17</YPos2><SelStart2>781</SelStart2><SelEnd2>789</SelEnd2></Tab></Pane><ActivePane>0</ActivePane><Sizes><Pane><X>1000000</X><Y>1000000</Y></Pane></Sizes><SplitMode>1</SplitMode></Editor>
+    <Positions>
+      
+      
+      
+      
+      
+    <Top><Row0><Sizes><Toolbar-00fb6910><key>iaridepm.enu1</key></Toolbar-00fb6910></Sizes></Row0><Row1><Sizes><Toolbar-12e0fce8><key>debuggergui.enu1</key></Toolbar-12e0fce8></Sizes></Row1><Row2><Sizes/></Row2></Top><Left><Row0><Sizes><Wnd4><Rect><Top>-2</Top><Left>-2</Left><Bottom>721</Bottom><Right>382</Right><x>-2</x><y>-2</y><xscreen>513</xscreen><yscreen>515</yscreen><sizeHorzCX>267188</sizeHorzCX><sizeHorzCY>500973</sizeHorzCY><sizeVertCX>200000</sizeVertCX><sizeVertCY>703307</sizeVertCY></Rect></Wnd4></Sizes></Row0></Left><Right><Row0><Sizes><Wnd5><Rect><Top>-2</Top><Left>-2</Left><Bottom>721</Bottom><Right>376</Right><x>-2</x><y>-2</y><xscreen>513</xscreen><yscreen>515</yscreen><sizeHorzCX>267188</sizeHorzCX><sizeHorzCY>500973</sizeHorzCY><sizeVertCX>196875</sizeVertCX><sizeVertCY>703307</sizeVertCY></Rect></Wnd5></Sizes></Row0></Right><Bottom><Row0><Sizes><Wnd3><Rect><Top>-2</Top><Left>-2</Left><Bottom>235</Bottom><Right>1922</Right><x>-2</x><y>-2</y><xscreen>1924</xscreen><yscreen>237</yscreen><sizeHorzCX>1002083</sizeHorzCX><sizeHorzCY>230545</sizeHorzCY><sizeVertCX>267188</sizeVertCX><sizeVertCY>500973</sizeVertCY></Rect></Wnd3></Sizes></Row0></Bottom><Float><Sizes/></Float></Positions>
+  </Desktop>
+</Project>
+
+

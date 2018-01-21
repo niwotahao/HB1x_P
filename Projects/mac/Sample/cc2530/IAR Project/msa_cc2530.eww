@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<workspace>
+  <project>
+    <path>$WS_DIR$\msa_cc2530.ewp</path>
+  </project>
+  <batchBuild>
+    <batchDefinition>
+      <name>ALL</name>
+      <member>
+        <project>msa_cc2530</project>
+        <configuration>Normal</configuration>
+      </member>
+      <member>
+        <project>msa_cc2530</project>
+        <configuration>Secure</configuration>
+      </member>
+      <member>
+        <project>msa_cc2530</project>
+        <configuration>Normal-Banked</configuration>
+      </member>
+      <member>
+        <project>msa_cc2530</project>
+        <configuration>Secure-Banked</configuration>
+      </member>
+      <member>
+        <project>msa_cc2530</project>
+        <configuration>HB1x_E-TX</configuration>
+      </member>
+      <member>
+        <project>msa_cc2530</project>
+        <configuration>HB1x_E-TX-S</configuration>
+      </member>
+      <member>
+        <project>msa_cc2530</project>
+        <configuration>HB1x_R-RX</configuration>
+      </member>
+      <member>
+        <project>msa_cc2530</project>
+        <configuration>HB1x_R-RX-S</configuration>
+      </member>
+    </batchDefinition>
+  </batchBuild>
+</workspace>
+
+
