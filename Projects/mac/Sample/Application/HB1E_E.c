@@ -252,7 +252,7 @@ uint8 CancelFlg = 0;
 
 uint8 RFIDUID[4]={0,0,0,0};
 uint8 OldRFIDUID[4] ={0,0,0,0};
-uint8 RFIDTemp[20]={0,0};
+uint8 RFIDTemp[16]={0,0,0,0};
 
 uint8 SendRfCnt = 0;
 
@@ -304,8 +304,8 @@ void BSP_InitInterrupt(void)
 /***************Key Interrupt Init****************/
     APCFG |= 0x01;//P0.0ADC
     PICTL |= 0x01;  //Falling edge
-    P0IEN |= 0x3f; //P0.1 2 3 4 5 Enable interrupt Mask
-    IEN1 |= 0x20;  //BV(5)P0 Interrupt enable
+    ///P0IEN |= 0x3f; //P0.1 2 3 4 5 Enable interrupt Mask
+    ///IEN1 |= 0x20;  //BV(5)P0 Interrupt enable
     P0IFG = 0x00; //Clear any pending interrupt
 
     /*
@@ -623,6 +623,97 @@ void MSA_Init(uint8 taskId)
     PowerAdc >>=2;
 
     PcdReset();
+    
+
+        PcdAntennaOn();
+        M500PcdConfigISOType('A');
+        //while(PcdRequest(0x52,RFIDTemp) != MI_OK);
+#if 0
+        while(1)
+        {
+            //PcdReset();
+            //PcdAntennaOn();
+            //M500PcdConfigISOType('A');
+        
+            RFIDUID[0] = 0;
+            RFIDUID[1] = 0;
+            RFIDUID[2] = 0;
+            RFIDUID[3] = 0;
+            RFIDTemp[0] = 0;
+
+            if(PcdRequest(PICC_REQIDL,RFIDTemp) >= MI_OK)
+            {
+                while(PcdAnticoll(RFIDUID) >= MI_OK)
+                { 
+
+                  osal_start_timerEx(MSA_TaskId, MSA_SCAN_EVENT,10);
+                }
+
+            }
+            //PcdAntennaOff();
+            //PcbEnterSleep();
+        }
+#endif 
+        while(1)
+        {
+            //PcdReset();
+            //PcdAntennaOn();
+            //M500PcdConfigISOType('A');
+        
+            RFIDUID[0] = 0;
+            RFIDUID[1] = 0;
+            RFIDUID[2] = 0;
+            RFIDUID[3] = 0;
+            RFIDTemp[0] = 0;
+
+            if(PcdRequest(PICC_REQIDL,RFIDTemp) >= MI_OK) //PICC_REQIDL
+            {
+                if(PcdAnticollThree(RFIDUID) >= MI_OK)
+                { 
+#if 1
+                    if(PcdSelect(RFIDUID) >= MI_OK)
+                    { 
+                      /*
+                      uint8 key[6]={0xFF,0xFF,0xFF,0xFF,0xFF,0xFF};
+                        if(PcdAuthState(0x60,0x00,key,RFIDUID)>=MI_OK)
+                        {
+                            if(PcdAuthState(0x61,0x00,key,RFIDUID)>=MI_OK)
+                            {
+                             
+                                    RFIDTemp[0] = 0x55;
+                                    if(PcdWrite(0x00,RFIDTemp))
+                                    {
+                                        RFIDTemp[0] = 0x00;
+                                        if(PcdRead(0x00,RFIDTemp))
+                                        {
+                                            RFIDTemp[3] = 0x66;
+                                        }
+                                    }
+                              
+                              
+                                 //PcdHalt();
+                            }
+                        }
+                      */
+                       
+                    }
+#endif
+                    //PcdHalt();
+                    //PcdHaltThree(RFIDUID);
+                    //osal_start_timerEx(MSA_TaskId, MSA_SCAN_EVENT,10);
+                    RFIDUID[0] = 0;
+                    RFIDUID[1] = 0;
+                    RFIDUID[2] = 0;
+                    RFIDUID[3] = 0;
+                    RFIDTemp[0] = 0;
+                }
+                RFIDTemp[1] = 0;
+
+            }
+            //PcdAntennaOff();
+            //PcbEnterSleep();
+        }
+
     osal_start_timerEx(MSA_TaskId,MSA_READ_KEY_EVT,2000);
     
     osal_start_timerEx(MSA_TaskId, MSA_SCAN_EVENT,10);
@@ -927,10 +1018,34 @@ uint16 MSA_ProcessEvent(uint8 taskId, uint16 events)
         M500PcdConfigISOType('A');
         //while(PcdRequest(0x52,RFIDTemp) != MI_OK);
         
+        while(1)
+        {
+            //PcdReset();
+            //PcdAntennaOn();
+            //M500PcdConfigISOType('A');
+        
+            RFIDUID[0] = 0;
+            RFIDUID[1] = 0;
+            RFIDUID[2] = 0;
+            RFIDUID[3] = 0;
+
+            if(PcdRequest(PICC_REQIDL,RFIDTemp) >= MI_OK)
+            {
+                if(PcdAnticollThree(RFIDUID) >= MI_OK)
+                { 
+                    ReadFlg = 0x01;
+                    PcdHaltThree(RFIDUID);
+                }
+
+            }
+            //PcdAntennaOff();
+            //PcbEnterSleep();
+        }
+        
         /*
         if(PcdRequest(0x52,RFIDTemp) == MI_OK)
         {
-            while(PcdAnticoll(RFIDUID) != MI_OK)
+            if(PcdAnticoll(RFIDUID) == MI_OK)
             { 
                 ReadFlg = 0x01;
                 PcdHalt();
@@ -938,6 +1053,7 @@ uint16 MSA_ProcessEvent(uint8 taskId, uint16 events)
             
         }*/
         //PcdHalt();
+        /*
         while(1)
         {
           if(PcdRequest(PICC_REQALL,RFIDTemp) == MI_OK)
@@ -952,7 +1068,7 @@ uint16 MSA_ProcessEvent(uint8 taskId, uint16 events)
           {
               break;
           }
-        }
+        }*/
 
         PcdAntennaOff();
         PcbEnterSleep();
@@ -994,7 +1110,7 @@ uint16 MSA_ProcessEvent(uint8 taskId, uint16 events)
                 SendFlg = 0x00;
                 
                 KeyValue = 0x80000000;  /**< RFIDÊý¾Ý°ü */
-                MSA_EndSendData(RF_E2P_MSG,KeyValue,4,&RFIDUID[0],1);
+                //MSA_EndSendData(RF_E2P_MSG,KeyValue,4,&RFIDUID[0],1);
             }
             
             /*****************************************************/

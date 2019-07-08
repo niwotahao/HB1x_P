@@ -9,7 +9,7 @@ TriggerName=main
 LimitSize=0
 ByteLimit=50
 [DebugChecksum]
-Checksum=-849789044
+Checksum=937593282
 [CallStack]
 ShowArgs=0
 [Disassembly]
@@ -20,7 +20,10 @@ Fmt1=ComSetAddr_t-shortAddr	4	0
 Fmt2=ComSetAddr_t-ver	4	0
 Fmt3=RfPc2EndDTime_t-TaskID	4	0
 [array_types]
-Fmt0=uint8 [2]	4	0
+Fmt0=uint8 [16]	4	0
+Fmt1=uint8 [18]	4	0
+Fmt2=uint8 [2]	4	0
+Fmt3=uint8 [4]	4	0
 [watch_formats]
 Fmt0={W}0:CallId	4	0
 Fmt1={W}0:Channle	4	0
@@ -36,8 +39,21 @@ Fmt10={W}0:addr	4	0
 Fmt11={W}0:cmd	4	0
 Fmt12={W}0:len	4	0
 Fmt13={W}0:msa_DevShortAddr	4	0
-Fmt14={W}0:status	4	0
-Fmt15={W}0:v	4	0
+Fmt14={W}0:n	4	0
+Fmt15={W}0:status	4	0
+Fmt16={W}0:unLen	4	0
+Fmt17={W}0:v	4	0
+[Breakpoints]
+Bp0=_ "STD_CODE" "{$PROJ_DIR$\..\..\Application\HB1L_E.c}.679.6" 0 0 0 0 "" 0 ""
+Bp1=_ "STD_CODE" "{$PROJ_DIR$\..\..\Application\HB1S_L.c}.1052.15" 0 0 0 0 "" 0 ""
+Bp2=_ "STD_CODE" "{$PROJ_DIR$\..\..\Application\HB1E_E.c}.1174.17" 1 0 0 0 "" 0 ""
+Bp3=_ "STD_CODE" "{$PROJ_DIR$\..\..\Application\HB1E_E.c}.1174.17" 1 0 0 0 "" 0 ""
+Bp4=_ "STD_CODE" "{$PROJ_DIR$\..\..\Application\HB1E_E.c}.1174.17" 0 0 0 0 "" 0 ""
+Bp5=_ "STD_CODE" "{$PROJ_DIR$\..\..\Application\HB1E_E\MFRC522.c}.1120.17" 1 0 0 0 "" 0 ""
+Count=6
+[ChipconEmu]
+Stop timers on halt=1
+Leave target running=1
 [Log file]
 LoggingEnabled=_ 0
 LogFile=_ ""
@@ -45,15 +61,6 @@ Category=_ 0
 [TermIOLog]
 LoggingEnabled=_ 0
 LogFile=_ ""
-[Breakpoints]
-Bp0=_ "STD_CODE" "{$PROJ_DIR$\..\..\Application\HB1L_E.c}.679.6" 0 0 0 0 "" 0 ""
-Bp1=_ "STD_CODE" "{$PROJ_DIR$\..\..\Application\HB1S_L.c}.1052.15" 0 0 0 0 "" 0 ""
-Bp2=_ "STD_CODE" "{$PROJ_DIR$\..\..\Application\HB1E_E.c}.957.9" 1 0 0 0 "" 0 ""
-Bp3=_ "STD_CODE" "{$PROJ_DIR$\..\..\Application\HB1E_E.c}.957.9" 1 0 0 0 "" 0 ""
-Count=4
-[ChipconEmu]
-Stop timers on halt=1
-Leave target running=1
 [Aliases]
 A0=_ "F:\LXP_Project\HBee\HB1x_CRWE\Code\HB1x_CRWE v3\HB1x_P\Components\hal\target\CC2530USB\hal_flash.c" ""
 A1=_ "F:\LXP_Project\HBee\HB1x_CRWE\Code\HB1x_CRWE v3\HB1x_P\Components\mac\low_level\srf04\single_chip\mac_mcu.c" ""

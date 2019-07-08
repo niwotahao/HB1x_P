@@ -75,6 +75,17 @@ void PcdComMF522Fifth();
 void ReadDataFirst();
 void PcdComMF522Sixth();
 void PcdComMF522Seventh();
+
+
+int8 PcdComMF522Three(uint8 Command, 
+                 uint8 *pInData, 
+                 uint8 InLenByte,uint8 intbit,
+                 uint8 *pOutData, 
+                 uint16 *pOutLenBit);
+
+int8 PcdRequestThree(uint8 req_code,uint8 *pTagType);
+int8 PcdAnticollThree(uint8 *pSnr);
+int8 PcdHaltThree(uint8 *pSnr);
 /*******************************************************************************************************/
 typedef struct bs     //定义位域
 {
@@ -189,6 +200,7 @@ typedef struct bs     //定义位域
 /////////////////////////////////////////////////////////////////////
 //和MF522通讯时返回的错误代码
 /////////////////////////////////////////////////////////////////////
+#define MI_CONFLICT                    1
 #define MI_OK                          0
 #define MI_NOTAGERR                    (-1)
 #define MI_ERR                         (-2)

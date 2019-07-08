@@ -8,7 +8,8 @@
 /*******************************************************************************************************/
 uint8 ReciveFlag;
 bit_data_t bit_data;
-
+uint8 ucComMF522Buf[MAXRLEN]; 
+uint8 ReciveData[MAXRLEN];
 
 /*******************************************************************************************************/
 void PcdComMF522Seventh(void);
@@ -130,6 +131,7 @@ uint8 SPI_WriteReadData(uint8 Data)
 {
     uint8 rxData;
 
+    
     SPI_TX(Data);
     SPI_WAIT_RXRDY();
     rxData = SPI_RX();
@@ -331,7 +333,6 @@ int8 PcdRequest(uint8 req_code,uint8 *pTagType)
 {
    int8 status;  
    uint16 unLen;
-   uint8 ucComMF522Buf[MAXRLEN]; 
 
    ClearBitMask(Status2Reg,0x08);       //不加密传输
    WriteRawRC(BitFramingReg,0x07);      //定义最后一个字节的多少位要被传输(如果为000b那么最后一个字节的全部位都被传输)，7位被传输
@@ -364,7 +365,6 @@ int8 PcdAnticoll(uint8 *pSnr)
     int8    status;
     uint8   i,snr_check=0;
     uint16  unLen;
-    uint8   ucComMF522Buf[MAXRLEN]; 
     
 
     ClearBitMask(Status2Reg,0x08);
@@ -416,7 +416,6 @@ int8 PcdAnticollSecond(uint8 *pSnr)
     int8 status;
     uint8 i,snr_check=0;
     uint16  unLen;
-    uint8 ucComMF522Buf[MAXRLEN]; 
 	uint8 *ReciveData;
     
     ClearBitMask(Status2Reg,0x08);   //不加密传输
@@ -469,7 +468,6 @@ int8 PcdSelect(uint8 *pSnr)
     int8 status;
     uint8 i;
     uint16  unLen;
-    uint8 ucComMF522Buf[MAXRLEN]; 
     
     ucComMF522Buf[0] = PICC_ANTICOLL1;
     ucComMF522Buf[1] = 0x70;
@@ -510,7 +508,7 @@ int8 PcdAuthState(uint8 auth_mode,uint8 addr,uint8 *pKey,uint8 *pSnr)
 {
     int8 status;
     uint16  unLen;
-    uint8 i,ucComMF522Buf[MAXRLEN]; 
+    uint8 i; 
 
     ucComMF522Buf[0] = auth_mode;
     ucComMF522Buf[1] = addr;
@@ -518,7 +516,7 @@ int8 PcdAuthState(uint8 auth_mode,uint8 addr,uint8 *pKey,uint8 *pSnr)
     {    
       ucComMF522Buf[i+2] = *(pKey+i);   
     }
-    for (i=0; i<6; i++)
+    for (i=0; i<4; i++)
     {    
       ucComMF522Buf[i+8] = *(pSnr+i);   
     }
@@ -541,7 +539,7 @@ int8 PcdRead(uint8 addr,uint8 *pData)
 {
     int8 status;
     uint16 unLen;
-    uint8 i,ucComMF522Buf[MAXRLEN]; 
+    uint8 i; 
 
     ucComMF522Buf[0] = PICC_READ;
     ucComMF522Buf[1] = addr;
@@ -572,7 +570,7 @@ int8 PcdWrite(uint8 addr,uint8 *pData)
 {
     int8 status;
     uint16 unLen;
-    uint8 i,ucComMF522Buf[MAXRLEN]; 
+    uint8 i; 
     
     ucComMF522Buf[0] = PICC_WRITE;
     ucComMF522Buf[1] = addr;
@@ -610,12 +608,11 @@ int8 PcdHalt(void)
 {
     int8 status;
     uint16 unLen;
-    uint8 ucComMF522Buf[MAXRLEN]; 
 
     ucComMF522Buf[0] = PICC_HALT;
     ucComMF522Buf[1] = 0;
     CalulateCRC(ucComMF522Buf,2,&ucComMF522Buf[2]);
- 
+
     status = PcdComMF522(PCD_TRANSCEIVE,ucComMF522Buf,4,ucComMF522Buf,&unLen);
 
     return MI_OK;
@@ -728,6 +725,7 @@ void ClearBitMask(uint8 reg,uint8 mask)
           pOutData[OUT]:接收到的卡片返回数据
           *pOutLenBit[OUT]:返回数据的位长度
 ********************************************************************************************************/
+uint8 err;
 int8 PcdComMF522(uint8 Command, 
                  uint8 *pInData, 
                  uint8 InLenByte,
@@ -770,8 +768,8 @@ int8 PcdComMF522(uint8 Command,
     	SetBitMask(BitFramingReg,0x80);  			//开始传送		
    	}      	
     
-	//i = 600;//根据时钟频率调整，操作M1卡最大等待时间25ms
-	i = 300;  
+	i = 1000;//根据时钟频率调整，操作M1卡最大等待时间25ms
+	//i = 300;  
     do 
     {
          n = ReadRawRC(ComIrqReg);  				//查询是否有(发送，接收，空闲，超时，错误)中断
@@ -783,7 +781,8 @@ int8 PcdComMF522(uint8 Command,
 	      
     if (i!=0)  
     {    
-         if(!(ReadRawRC(ErrorReg)&0x1B)) 			//判断错误是否是FIFO缓存区溢出错误,奇偶校验错误,协议错误,检测到位碰撞错误(只在106kbit/s按位防碰撞中有效)
+         err = ReadRawRC(ErrorReg);
+         if(!(err&0x1B)) 			//判断错误是否是FIFO缓存区溢出错误,奇偶校验错误,协议错误,检测到位碰撞错误(只在106kbit/s按位防碰撞中有效)
          {
              status = MI_OK;
              if (n & irqEn & 0x01)      			//判断是否是超时中断
@@ -927,6 +926,241 @@ int8 PcdComMF522Second(uint8 Command,
    SetBitMask(ControlReg,0x80);           //停止定时器
    WriteRawRC(CommandReg,PCD_IDLE);       //取消当前指令 
    return status;
+}
+/*******************************************************************************************************
+
+********************************************************************************************************/
+int8 PcdComMF522Three(uint8 Command, 
+                 uint8 *pInData, 
+                 uint8 InLenByte,uint8 intbit,
+                 uint8 *pOutData, 
+                 uint16 *pOutLenBit)
+{
+    int8 status = MI_ERR;
+    uint8 irqEn   = 0x00;
+    uint8 waitFor = 0x00;
+    uint8 lastBits;
+    uint8 n;
+    uint16 i;
+    uint8 err;
+    switch (Command)
+    {
+       case PCD_AUTHENT:
+          irqEn   = 0x12;
+          waitFor = 0x10;
+          break;
+       case PCD_TRANSCEIVE:
+          irqEn   = 0x77;
+          waitFor = 0x30;
+          break;
+       default:
+         break;
+    }
+    WriteRawRC(ComIEnReg,irqEn|0x80);  //引脚IRQ跟Status1Reg的IRq位相反，使能发送，接受，空闲，超时，错误中断，在IRQ脚输出低电平  
+    ClearBitMask(ComIrqReg,0x80);      //清除所有使能IRQ(发送，接受，空闲，超时，错误)标志位
+    WriteRawRC(CommandReg,PCD_IDLE);   //取消当前命令
+    SetBitMask(FIFOLevelReg,0x80);     //清除FIFO缓存读写指示器和缓存溢出标志在错误寄存器
+    
+    for (i=0; i<InLenByte; i++)
+    {   
+    	WriteRawRC(FIFODataReg, pInData[i]);  		//写进64字节的FIFO缓存区  
+    }  
+    WriteRawRC(CommandReg, Command);               	//启动发送和接收
+    
+    if (Command == PCD_TRANSCEIVE)
+    {    
+        //WriteRawRC(BitFramingReg,0x80|intbit); 
+    	SetBitMask(BitFramingReg,0x80|((intbit)<<4)|intbit);  			//开始传送	
+      
+        //WriteRawRC(BitFramingReg,(ReadRawRC(BitFramingReg)&(~0x07)) | intbit);  // set bit mask
+   	}  
+    
+	i = 1000;//根据时钟频率调整，操作M1卡最大等待时间25ms
+	//i = 300;  
+    do 
+    {
+         n = ReadRawRC(ComIrqReg);  				//查询是否有(发送，接收，空闲，超时，错误)中断
+         i--;  
+    }
+    while ((i!=0) && !(n&0x01) && !(n&waitFor));  	//i=0,或者超时中断，空闲中断，接收中断则退出循环
+    
+
+    //ClearBitMask(BitFramingReg,0x80|intbit);   			//停止传送
+    WriteRawRC(BitFramingReg, 0x00);
+    
+    //err = ReadRawRC(CollReg);
+	      
+    if (i!=0)  
+    {    err = ReadRawRC(ErrorReg);
+         if(!(err&0x15)) 			//判断错误是否是FIFO缓存区溢出错误,奇偶校验错误,协议错误,
+         {
+             //没有错误
+             if(err&0x08)
+             {
+                status = MI_CONFLICT; //有碰撞也进来 //检测到位碰撞错误(只在106kbit/s按位防碰撞中有效)
+             }
+             else
+             {
+                status = MI_OK;
+             }
+             
+             if (n & irqEn & 0x01)      			//判断是否是超时中断
+             {   
+             	status = MI_NOTAGERR;   
+             }
+             if (Command == PCD_TRANSCEIVE)
+             {
+               	n = ReadRawRC(FIFOLevelReg);  		//读取在FIFO缓存区的字节数
+              	lastBits = ReadRawRC(ControlReg) & 0x07; //最后接收字节的有效位的个数，如果为0则整个最后接收字节有效
+                if (lastBits)
+                {   
+                	*pOutLenBit = (n-1)*8 + lastBits;   
+                }
+                else
+                {
+                	*pOutLenBit = n*8;   
+                }
+                if (n == 0)
+                {   
+                	n = 1;    
+                }
+                if (n > MAXRLEN)
+                {   
+                	n = MAXRLEN;   
+                }
+                for (i=0; i<n; i++)
+                {   
+                	pOutData[i] = ReadRawRC(FIFODataReg);   //从FIFO缓存区读取n个字节数据 
+                }  
+            }
+         }
+         else
+         {   
+         	status = MI_ERR;   
+         }
+   }
+   SetBitMask(ControlReg,0x80);           //停止定时器
+   WriteRawRC(CommandReg,PCD_IDLE);       //取消当前指令 
+   return status;
+}
+/*******************************************************************************************************
+
+********************************************************************************************************/
+int8 PcdRequestThree(uint8 req_code,uint8 *pTagType)
+{
+   int8 status;  
+   uint16 unLen;
+   
+   ClearBitMask(Status2Reg,0x08);       //不加密传输
+   WriteRawRC(BitFramingReg,0x07);      //定义最后一个字节的多少位要被传输(如果为000b那么最后一个字节的全部位都被传输)，7位被传输
+
+   SetBitMask(TxControlReg,0x03);       //使能天线TX1和TX2,传送13.56MHz的调制载波传输数据
+   
+   ucComMF522Buf[0] = req_code;  //REQA = 0X26 WUPA = 0x52 ------> ATQA
+
+   status = PcdComMF522Three(PCD_TRANSCEIVE,ucComMF522Buf,1,0,ucComMF522Buf,&unLen);
+
+   if ((status >= MI_OK) && (unLen == 0x10))
+   {    
+       *pTagType     = ucComMF522Buf[0];
+       *(pTagType+1) = ucComMF522Buf[1];
+   }
+   else
+   {   
+		status = MI_ERR;   
+   }
+   
+   return status;
+}
+/*******************************************************************************************************
+
+********************************************************************************************************/
+int8 PcdAnticollThree(uint8 *pSnr)
+{
+    int8 status;
+    uint8 i,n = 32,snr_check=0,bitT=0;
+    uint8 m=0;
+    uint16  unLen=0;
+    
+    uint8 snr[4] = {0,0,0,0};
+    
+    ClearBitMask(Status2Reg,0x08);   //不加密传输
+    WriteRawRC(BitFramingReg,0x00);  //最后一个字节的全部位都被传送
+    ClearBitMask(CollReg,0x80);      //如果有一个冲撞则全部接收的位都清0(此情况只在106kbit/s传输时的按位防冲撞中有效，其他情况则设为1)
+    
+
+    
+    ucComMF522Buf[0] = PICC_ANTICOLL1;  //SEL
+    ucComMF522Buf[1] = 0x20;            //NVB
+    while(n--)
+    {
+        for(i=0;i<MAXRLEN;i++)
+        {
+            ReciveData[i] = 0;
+        }
+      
+        status = PcdComMF522Three(PCD_TRANSCEIVE,ucComMF522Buf,2+m,bitT,ReciveData,&unLen);    //原始代码
+        if (status >= MI_OK)
+        {
+            if(status == MI_CONFLICT)
+            {
+                uint8 by,bt;
+                by = unLen/8;
+                bt = unLen%8; 
+                ucComMF522Buf[1]   = by+2;
+                ucComMF522Buf[1] <<= 4;
+                ucComMF522Buf[1]  |= bt; bitT = bt;
+                for(i=0;i<by;i++)
+                {
+                    ucComMF522Buf[2+i] = ReciveData[i];
+                    snr[i] = ReciveData[i];
+                }
+                ucComMF522Buf[2+i] = ReciveData[i];
+                snr[i] = ReciveData[i];
+                m = i+1;
+            }
+            else
+            {
+                ReciveData[0] |= snr[0];
+                //原始代码
+                for (i=0; i<4; i++)
+                {   
+                    *(pSnr+i)  = ReciveData[i];
+                    snr_check ^= ReciveData[i];
+                }
+                if (snr_check != ReciveData[i])
+                {   
+                    status = MI_ERR;
+                }
+                break;
+            }
+            
+        }
+        SetBitMask(CollReg,0x80); //将按位防冲撞设置为1(只有106kbit/s需要按位防冲撞，其他的不需要按位防冲撞则设置为1)
+    }
+    SetBitMask(CollReg,0x80);
+    return status;
+}
+/*******************************************************************************************************
+功    能：命令卡片进入休眠状态
+返    回: 成功返回MI_OK
+********************************************************************************************************/
+int8 PcdHaltThree(uint8 *pSnr)
+{
+    int8 status;
+    uint16 unLen;
+
+    ucComMF522Buf[0] = PICC_HALT;
+    ucComMF522Buf[1] = 0;
+    ucComMF522Buf[2] = pSnr[0];
+    ucComMF522Buf[3] = pSnr[1];
+    ucComMF522Buf[4] = pSnr[2];
+    ucComMF522Buf[5] = pSnr[3];
+    CalulateCRC(ucComMF522Buf,6,&ucComMF522Buf[6]);
+ 
+    status = PcdComMF522(PCD_TRANSCEIVE,ucComMF522Buf,7,ucComMF522Buf,&unLen);
+
+    return MI_OK;
 }
 /*******************************************************************************************************
 
@@ -1152,11 +1386,8 @@ void PcdComMF522Fifth(void)
 			        }
 			        if (snr_check != pOutData[i])
 			        {   /*halUartWrite(pSnr,4);*/ }
-					
 			 }
-
          }
-
    }
    SetBitMask(ControlReg,0x80);           //停止定时器
    WriteRawRC(CommandReg,PCD_IDLE);       //取消当前指令 
@@ -1261,7 +1492,6 @@ void PcdComMF522Sixth(void)
 ********************************************************************************************************/
 void PcdComMF522Seventh(void)
 {
-
     uint8 n;
 	uint8 m;
     uint16 i;
@@ -1361,7 +1591,6 @@ int8 PcdValue(uint8 dd_mode,uint8 addr,uint8 *pValue)
     uint8 i; //添加
     int8 status;
     uint16 unLen;
-    uint8 ucComMF522Buf[MAXRLEN]; 
     
     ucComMF522Buf[0] = dd_mode;
     ucComMF522Buf[1] = addr;
@@ -1411,7 +1640,6 @@ int8 PcdBakValue(uint8 sourceaddr, uint8 goaladdr)
 {
     int8 status;
     uint16 unLen;
-    uint8 ucComMF522Buf[MAXRLEN]; 
 
     ucComMF522Buf[0] = PICC_RESTORE;
     ucComMF522Buf[1] = sourceaddr;

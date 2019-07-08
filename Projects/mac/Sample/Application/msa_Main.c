@@ -102,8 +102,7 @@ extern void RfTestProcessEvent(void);
  * @brief       Start of application.
  *
  * @param       none
- *
- * @return      none
+ * * @return      none
  **************************************************************************************************
  */
 int main(void)
